@@ -1,14 +1,40 @@
 # Algoritmo Shunting Yard para convertir una expresión regular de infix a postfix
+def agregar_concatenacion_implicita(expresion_regular):
+    """
+    Inserta el operador de concatenación (.) implícito en la expresión regular.
+    Por ejemplo, convierte "ab" en "a.b" si hay una concatenación implícita.
+    """
+    resultado = []
+    operadores = set(['*', '|', '(', ')'])
+
+    for i in range(len(expresion_regular)):
+        char = expresion_regular[i]
+        resultado.append(char)
+
+        # Verificar si necesitamos insertar un operador de concatenación
+        if i + 1 < len(expresion_regular):
+            next_char = expresion_regular[i + 1]
+
+            # Insertar concatenación implícita entre:
+            # - símbolo y símbolo (ab => a.b)
+            # - símbolo y paréntesis abierto (a( => a.( )
+            # - cierre de kleene (*) y símbolo/parentesis abierto (*a => * . a)
+            if (char not in operadores or char == ')' or char == '*') and (next_char not in operadores or next_char == '('):
+                resultado.append('.')
+    
+    return ''.join(resultado)
+
+# Algoritmo Shunting Yard para convertir una expresión regular de infix a postfix
 def infix_a_postfix(expresion_regular):
     # Definir la precedencia de los operadores
-    precedencia = {'*': 3, '.': 2, '|': 1}
-    operadores = set(['*', '|', '(', ')', '.'])  # Los operadores posibles
+    precedencia = {'+': 1, '-': 1, '*': 2, '/': 2, '(': 0}
+    operadores = set(['+', '-', '*', '/', '(', ')'])  # Los operadores posibles
     postfix = []  # Lista para la expresión en postfix
     pila = []  # Pila para los operadores
 
     # Recorremos cada símbolo de la expresión regular
     for char in expresion_regular:
-        # Si el carácter es un símbolo (no un operador), lo añadimos a la salida
+        # Si el carácter es un operando (número o letra), lo añadimos a la salida
         if char not in operadores:
             postfix.append(char)
         # Si es un paréntesis abierto, lo empujamos a la pila
@@ -31,8 +57,3 @@ def infix_a_postfix(expresion_regular):
 
     return ''.join(postfix)
 
-# Prueba simple para verificar que el algoritmo funciona
-if __name__ == "__main__":
-    expresion = "(b|b)*abb(a|b)*"
-    print("Infix: ", expresion)
-    print("Postfix: ", infix_a_postfix(expresion))

@@ -1,12 +1,5 @@
-# expresión regular (r): (b|b)*abb(a|b)*
-# la cadena (w): babbaaaaa
-#  símbolo para representar epsilon (ε): ε
-
-# Función para leer la entrada del usuario
-# Importar la función desde el archivo shunting_yard.py
 # Importar las funciones desde los archivos correspondientes
-
-from shunting_yard import infix_a_postfix
+from shunting_yard import infix_a_postfix, agregar_concatenacion_implicita
 
 # Función para leer la entrada del usuario
 def leer_entrada():
@@ -49,3 +42,6 @@ if __name__ == "__main__":
     
     # Mostrar la expresión en notación postfix
     print(f"\nExpresión regular en postfix: {expresion_postfix}")
+
+#entrada: (5*4+3*)-1
+#salida: 54*3*+1-
