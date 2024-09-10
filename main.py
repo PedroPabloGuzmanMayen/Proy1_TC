@@ -22,15 +22,6 @@ def leer_entrada():
     
     return expresion_regular, cadena, epsilon, alfabeto
 
-# Función para extraer los símbolos del alfabeto de la expresión regular
-def extraer_alfabeto(expresion_regular):
-    # Definir los operadores comunes de expresiones regulares
-    operadores = set('|()*+')
-    
-    # Extraer todos los caracteres que no sean operadores
-    alfabeto = {char for char in expresion_regular if char not in operadores}
-    
-    return alfabeto
 
 # Función principal para ejecutar el programa
 if __name__ == "__main__":
@@ -45,3 +36,4 @@ if __name__ == "__main__":
 
 #entrada: (5*4+3*)-1
 #salida: 54*3*+1-
+
