@@ -26,9 +26,9 @@ def agregar_concatenacion_implicita(expresion_regular):
 
 # Algoritmo Shunting Yard para convertir una expresión regular de infix a postfix
 def infix_a_postfix(expresion_regular):
-    # Definir la precedencia de los operadores
-    precedencia = {'+': 1, '-': 1, '*': 2, '/': 2, '(': 0}
-    operadores = set(['+', '-', '*', '/', '(', ')'])  # Los operadores posibles
+    # Definir la precedencia de los operadores regulares
+    precedencia = {'|': 1, '.': 2, '*': 3}
+    operadores = set(['|', '.', '*', '(', ')'])  # Los operadores posibles
     postfix = []  # Lista para la expresión en postfix
     pila = []  # Pila para los operadores
 
@@ -57,3 +57,13 @@ def infix_a_postfix(expresion_regular):
 
     return ''.join(postfix)
 
+
+# Expresión regular de ejemplo
+regex_infix = 'a(bb)*c'
+# Insertar concatenación implícita
+regex_infix_concatenada = agregar_concatenacion_implicita(regex_infix)
+# Convertir a postfix
+regex_postfix = infix_a_postfix(regex_infix_concatenada)
+
+print("Infix con concatenación implícita:", regex_infix_concatenada)
+print("Postfix:", regex_postfix)
