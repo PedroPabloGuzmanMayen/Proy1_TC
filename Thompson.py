@@ -44,6 +44,16 @@ def kleeneStar(automata, state_counter):
 
 def or_operation(automata1, automata2, state_counter):
 
+    states = automata1.states + automata2.states #Sumar los estados de ambos automatas
+    states.insert(0, "i" + str(state_counter)) #Añadir un nuevo estado inicial
+    states.append("h" + str(state_counter)) #Añadir un nuevo estado final
+    transitions = {states[0]: {"ε":[automata1.initial_state, automata2.initial_state]}} #Agregar transiciones al estado inicial
+    transitions.update(automata1.transitions) #Añadir las transiciones del primer automata
+    transitions.update(automata2.transitions) #Añadir transiciones del segundo automata
+    transitions[automata1.final_states[0]] = {"ε": [states[len(states)-1]]} #Agregar la epsilon transicion al estado final del primer automata
+    transitions[automata2.final_states[0]] = {"ε": [states[len(states)-1]]} #Agregar la epsilon transicion al estado final del srgundo automata
+
+    return Automata(states, automata1.alphabet.union(automata2.alphabet), states[0],[states[len(states)-1]], transitions )
     pass
 
 
@@ -59,9 +69,6 @@ def Thompson_Algorithm(regex):
 
 auto = initialize_automata('a', state_counter)
 auto2 = initialize_automata('b', state_counter)
-auto3 = concat_automata(auto, auto2)
-auto4 = kleeneStar(auto3, state_counter)
+auto3 = or_operation(auto, auto2, state_counter)
 
-
-
-print(auto4)
+print(auto3)
