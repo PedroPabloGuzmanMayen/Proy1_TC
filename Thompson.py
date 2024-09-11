@@ -1,6 +1,6 @@
 from Automata import Automata
 
-
+state_counter = 1
 # Función para extraer los símbolos del alfabeto de la expresión regular
 def extraer_alfabeto(expresion_regular):
     # Definir los operadores comunes de expresiones regulares
@@ -11,9 +11,9 @@ def extraer_alfabeto(expresion_regular):
     
     return alfabeto
 
-def initialize_automata(expression):
-    return Automata([(expression + '1'), (expression +'2')], {expression},expression + '1', [expression + '2'],
-                    {expression + '1': {expression: expression + '2'}})
+def initialize_automata(expression, state_counter):
+    return Automata([(expression + str(state_counter) + '1'), (expression + str(state_counter) +'2')], {expression},expression + str(state_counter) + '1', [expression + str(state_counter) + '2'],
+                    {expression + str(state_counter) + '1': {expression: [expression + str(state_counter) + '2']}})
 
 def concat_automata(automata1, automata2):
     alphabet = automata1.alphabet.union(automata2.alphabet)
@@ -25,15 +25,22 @@ def concat_automata(automata1, automata2):
         automata1.transitions[automata1.final_states[0]].update(final)
     else:
         automata1.transitions[automata1.final_states[0]] = final
-    print(automata1.transitions)
+
     automata1.transitions.update(automata2.transitions) #Actualizar la lista de transiciones
     transitions = automata1.transitions
     
 
     return Automata(states, alphabet, automata1.initial_state, [automata2.final_states[0]], transitions)
     
-def kleeneStar(automata):
-    pass
+def kleeneStar(automata, state_counter):
+    states = automata.states
+    states.insert(0, "k" + str(state_counter)) #Añadir un nuevo estado inicial
+    states.append("j" + str(state_counter)) #Añadir un nuevo estado final
+    transitions = {states[0]: {"ε": [automata.initial_state, states[len(states)-1]]}} #Agregar las transiciones para el estado inicial
+    transitions.update(automata.transitions) #Añadir a la nueva lista de transiciones las transiciones del automata original
+    transitions[automata.final_states[0]] = {"ε": [automata.initial_state]} #Añadir la epsilon-transición para el estado final del automata original
+    return Automata(states, automata.alphabet, states[0], [states[len(states)-1]], transitions)
+    
 
 def or_operation(automata1, automata2):
     pass
@@ -49,20 +56,13 @@ def Thompson_Algorithm(regex):
         if i not in operators:
             pass
 
-auto = initialize_automata('a')
-
-auto2 = initialize_automata('b')
-
-print(auto)
-print(auto2)
 
 
-
-
+auto = initialize_automata('a', state_counter)
+auto2 = initialize_automata('b', state_counter)
 auto3 = concat_automata(auto, auto2)
-
-print(auto3)
-
+auto4 = kleeneStar(auto3, state_counter)
 
 
 
+print(auto4)
