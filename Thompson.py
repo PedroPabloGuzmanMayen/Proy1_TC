@@ -38,14 +38,13 @@ def kleeneStar(automata, state_counter):
     states.append("j" + str(state_counter)) #Añadir un nuevo estado final
     transitions = {states[0]: {"ε": [automata.initial_state, states[len(states)-1]]}} #Agregar las transiciones para el estado inicial
     transitions.update(automata.transitions) #Añadir a la nueva lista de transiciones las transiciones del automata original
-    transitions[automata.final_states[0]] = {"ε": [automata.initial_state]} #Añadir la epsilon-transición para el estado final del automata original
+    transitions[automata.final_states[0]] = {"ε": [automata.initial_state, states[len(states)-1]]} #Añadir la epsilon-transición para el estado final del automata original
     return Automata(states, automata.alphabet, states[0], [states[len(states)-1]], transitions)
     
 
-def or_operation(automata1, automata2):
+def or_operation(automata1, automata2, state_counter):
+
     pass
-
-
 
 
 def Thompson_Algorithm(regex):
