@@ -54,21 +54,34 @@ def or_operation(automata1, automata2, state_counter):
     transitions[automata2.final_states[0]] = {"ε": [states[len(states)-1]]} #Agregar la epsilon transicion al estado final del srgundo automata
 
     return Automata(states, automata1.alphabet.union(automata2.alphabet), states[0],[states[len(states)-1]], transitions )
-    pass
 
 
-def Thompson_Algorithm(regex):
+
+def Thompson_Algorithm(regex, state_counter):
     alphabet = extraer_alfabeto(regex)
     operators = ['|', '.', '*', '(', ')']
+    automata_stack = []
 
     for i in regex:
         if i not in operators:
-            pass
+            automata_stack.append(initialize_automata(i, state_counter))
+            state_counter += 1
+        else:
+
+            if i == ".":
+                automata2 = automata_stack.pop()
+                automata1 = automata_stack.pop()
+                automata_stack.append(concat_automata(automata1, automata2))
+            elif i == "|":
+                automata2 = automata_stack.pop()
+                automata1 = automata_stack.pop()
+                automata_stack.append(or_operation(automata1, automata2, state_counter))
+            elif i == "*":
+                automata = automata_stack.pop()
+                automata_stack.append(kleeneStar(automata, state_counter))
+    return automata_stack.pop()
+
+print(Thompson_Algorithm("abb.*.c.", state_counter))
 
 
 
-auto = initialize_automata('a', state_counter)
-auto2 = initialize_automata('b', state_counter)
-auto3 = or_operation(auto, auto2, state_counter)
-
-print(auto3)
