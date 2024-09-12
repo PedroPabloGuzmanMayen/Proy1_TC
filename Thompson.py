@@ -1,6 +1,6 @@
 from Automata import Automata
 
-state_counter = 1
+
 # Función para extraer los símbolos del alfabeto de la expresión regular
 def extraer_alfabeto(expresion_regular):
     # Definir los operadores comunes de expresiones regulares
@@ -57,31 +57,31 @@ def or_operation(automata1, automata2, state_counter):
 
 
 
-def Thompson_Algorithm(regex, state_counter):
+def Thompson_Algorithm(regex):
     alphabet = extraer_alfabeto(regex)
     operators = ['|', '.', '*', '(', ')']
     automata_stack = []
+    state_counter = 1
 
     for i in regex:
-        if i not in operators:
-            automata_stack.append(initialize_automata(i, state_counter))
+        if i not in operators: #verificar si es un operador a una expresión
+            automata_stack.append(initialize_automata(i, state_counter)) #Si es una operación, creamos un autómata para dicha expresión y lo agregamos al stack
             state_counter += 1
         else:
 
-            if i == ".":
+            if i == ".": #Si la operación es concatenación
                 automata2 = automata_stack.pop()
-                automata1 = automata_stack.pop()
-                automata_stack.append(concat_automata(automata1, automata2))
-            elif i == "|":
+                automata1 = automata_stack.pop() #Sacamos los dos últimos autómatas en el stack
+                automata_stack.append(concat_automata(automata1, automata2)) #Añadimos al stack la concatenación de los dos autómatas inciales
+            elif i == "|": #Si la operación es un or
                 automata2 = automata_stack.pop()
-                automata1 = automata_stack.pop()
-                automata_stack.append(or_operation(automata1, automata2, state_counter))
-            elif i == "*":
-                automata = automata_stack.pop()
-                automata_stack.append(kleeneStar(automata, state_counter))
-    return automata_stack.pop()
+                automata1 = automata_stack.pop() #Sacamos del stack los últimos 2 autómatas
+                automata_stack.append(or_operation(automata1, automata2, state_counter)) #Realizamos la operación or en los autómatas
+            elif i == "*": #Si la operación es la estrella de Kleene
+                automata = automata_stack.pop() #Sacamos el útlimo autómata del stack
+                automata_stack.append(kleeneStar(automata, state_counter)) #Hacemos la operación de la estrella de Kleene y añadimos el resultado al stack
+    return automata_stack.pop() #Devolvemos el último autómata en el stack
 
-print(Thompson_Algorithm("abb.*.c.", state_counter))
 
 
 

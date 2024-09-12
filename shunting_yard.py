@@ -58,12 +58,4 @@ def infix_a_postfix(expresion_regular):
     return ''.join(postfix)
 
 
-# Expresión regular de ejemplo
-regex_infix = 'a(bb)*c'
-# Insertar concatenación implícita
-regex_infix_concatenada = agregar_concatenacion_implicita(regex_infix)
-# Convertir a postfix
-regex_postfix = infix_a_postfix(regex_infix_concatenada)
 
-print("Infix con concatenación implícita:", regex_infix_concatenada)
-print("Postfix:", regex_postfix)
