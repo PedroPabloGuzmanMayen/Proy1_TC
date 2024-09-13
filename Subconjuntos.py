@@ -16,12 +16,7 @@ def closure(automata, state):
 
 
 def subsets(nfa):
-
-
-
-
     pass
-
 
 
 
