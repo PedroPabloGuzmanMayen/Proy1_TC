@@ -2,10 +2,10 @@
 
 ## Dependencias
 Para ejecutar correctamente el proyecto, es necesario que la computadora tenga instalado lo siguiente:
-    - Python 
-        - Streamlit
-        - Pip
-    - Docker (opcional)
+- Python 
+    - Streamlit
+    - Pip
+- Docker (opcional)
 ## ¿Cómo ejecutar el proyecto?
 Para ejecutar el proyecto de manera local, abre una terminal y ejecuta:
 ```sh
