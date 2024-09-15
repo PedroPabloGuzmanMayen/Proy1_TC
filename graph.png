@@ -1,0 +1,13 @@
+digraph {
+	k2 [shape=circle]
+	a11 [shape=circle]
+	a12 [shape=circle]
+	j2 [shape=doublecircle]
+	"" [shape=none]
+	"" -> k2
+	k2 -> a11 [label="ε"]
+	k2 -> j2 [label="ε"]
+	a11 -> a12 [label=a]
+	a12 -> a11 [label="ε"]
+	a12 -> j2 [label="ε"]
+}

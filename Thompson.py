@@ -83,5 +83,8 @@ def Thompson_Algorithm(regex):
     return automata_stack.pop() #Devolvemos el último autómata en el stack
 
 
+auto = Thompson_Algorithm("a*")
 
+print(auto)
 
+auto.to_graph()

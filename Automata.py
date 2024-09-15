@@ -1,4 +1,5 @@
 import json
+from graphviz import Digraph
 class Automata:
 
     def __init__(self, states, alphabet, initial_state, final_states, transitions):
@@ -33,4 +34,27 @@ class Automata:
         return (f"Automaton(states={self.states}, alphabet={self.alphabet}, "
                 f"initial_state={self.initial_state}, final_states={self.final_states}, "
                 f"transitions={self.transitions})")
+    
+    def to_graph(self):
+        dot = Digraph()
+
+    # Añadimos los estados
+        for state in self.states:
+            #Si el estado es un estado de aceptación, dibujamos un doble ciírculo
+            if state in self.final_states:
+                dot.node(state, shape='doublecircle')
+            else:
+                dot.node(state, shape='circle')
+
+    # Marcamos el estado inicial con una flecha
+        dot.node("", shape="none")  
+        dot.edge("", self.initial_state) 
+
+    # Agregamos las transiciones
+        for state, paths in self.transitions.items():
+            for symbol, next_states in paths.items():
+                for next_state in next_states:
+                    dot.edge(state, next_state, label=symbol)
+
+        dot.render("graph.png", format='png', view=False)
 
