@@ -42,19 +42,29 @@ class Automata:
         for state in self.states:
             #Si el estado es un estado de aceptación, dibujamos un doble ciírculo
             if state in self.final_states:
-                dot.node(state, shape='doublecircle')
+                dot.node(str(state), shape='doublecircle')
             else:
-                dot.node(state, shape='circle')
+                dot.node(str(state), shape='circle')
 
     # Marcamos el estado inicial con una flecha
         dot.node("", shape="none")  
-        dot.edge("", self.initial_state) 
+        dot.edge("", str(self.initial_state)) 
 
     # Agregamos las transiciones
         for state, paths in self.transitions.items():
             for symbol, next_states in paths.items():
-                for next_state in next_states:
-                    dot.edge(state, next_state, label=symbol)
+                for next_state in str(next_states):
+                    dot.edge(str(state), str(next_state), label=symbol)
 
         dot.render("graph.png", format='png', view=False)
+
+    def simulate(self, expression):
+        state = self.initial_state
+        for i in expression:
+            state = self.transitions[state][i]
+
+        if state in self.final_states:
+            return True
+        else:
+            return False
 

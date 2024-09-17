@@ -9,6 +9,7 @@ def main():
     st.set_page_config(page_title ='Automata', page_icon="https://png.pngtree.com/png-vector/20220719/ourmid/pngtree-robot-logo-template-vector-icon-illustration-sign-symbol-computer-vector-png-image_37807128.png")
     st.title('Construcción de Autómatas a partir de Expresiones Regulares')
     expression = st.text_input("Ingresa la expresión regular:")
+    word = st.text_input("Ingresa la palabra que crees que pertence a la expresión regular:  ")
     if st.button("Generar Autómata"):
         if expression:
             try:
