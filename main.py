@@ -4,6 +4,8 @@ from Thompson import Thompson_Algorithm
 from Automata import Automata
 from Subconjuntos import subsets_construction
 from Minimizar import *
+from NFA import NFA
+from DFA import DFA
 
 predefined_expressions = [
     'aabbaa',
@@ -40,6 +42,10 @@ def main():
                 st.write(f"Estado inicial: {NFA.initial_state}")
                 st.write(f"Estados finales: {NFA.final_states}")
                 st.write(f"Transiciones: {NFA.transitions}")
+
+                NFA.to_graph("NFA")
+                st.image("./NFA.png", caption="NFA Diagram", use_column_width=True)
+
 
                 DFA_n = subsets_construction(NFA)
 

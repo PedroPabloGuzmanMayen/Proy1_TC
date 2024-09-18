@@ -35,7 +35,7 @@ class Automata:
                 f"initial_state={self.initial_state}, final_states={self.final_states}, "
                 f"transitions={self.transitions})")
     
-    def to_graph(self):
+    def to_graph(self, filename):
         dot = Digraph()
         dot.attr(rankdir = 'LR', size = '8.5')
     # Añadimos los estados
@@ -56,7 +56,7 @@ class Automata:
                 for next_state in str(next_states):
                     dot.edge(str(state), str(next_state), label=symbol)
 
-        dot.render("graph.png", format='png', view=False)
+        dot.render(filename, format='png', view=False)
 
     def simulate(self, expression):
         state = self.initial_state
