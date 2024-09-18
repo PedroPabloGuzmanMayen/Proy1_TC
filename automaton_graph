@@ -1,0 +1,30 @@
+// Automaton
+digraph {
+	node [shape=circle]
+	k3
+	i3
+	a11
+	a12
+	b21
+	b22
+	h3
+	j3
+	a32
+	b42
+	b52 [shape=doublecircle]
+	"" [label="" height=0 shape=none width=0]
+	"" -> k3
+	k3 -> i3 [label="ε"]
+	k3 -> j3 [label="ε"]
+	i3 -> a11 [label="ε"]
+	i3 -> b21 [label="ε"]
+	a11 -> a12 [label=a]
+	b21 -> b22 [label=b]
+	a12 -> h3 [label="ε"]
+	b22 -> h3 [label="ε"]
+	h3 -> i3 [label="ε"]
+	h3 -> j3 [label="ε"]
+	j3 -> a32 [label=a]
+	a32 -> b42 [label=b]
+	b42 -> b52 [label=b]
+}

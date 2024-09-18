@@ -44,7 +44,7 @@ def main():
                 st.write(f"Transiciones: {NFA.transitions}")
 
                 NFA.to_graph("NFA")
-                st.image("./NFA.png", caption="NFA Diagram", use_column_width=True)
+                st.image("./NFA.png", caption="Diagrama del autómata no determinista  ", use_column_width=True)
 
 
                 DFA_n = subsets_construction(NFA)
@@ -56,6 +56,10 @@ def main():
                 st.write(f"Estados finales: {DFA_n.final_states}")
                 st.write(f"Transiciones: {DFA_n.transitions}")
 
+                DFA_n.to_graph("DFA")
+
+                st.image("./DFA.png", caption="Diagrama del autómata determinista sin minimizar", use_column_width=True)
+
                 DFA = minimize(DFA_n)
 
                 st.write("DFA minimizado: ")
@@ -65,11 +69,11 @@ def main():
                 st.write(f"Estados finales: {DFA.final_states}")
                 st.write(f"Transiciones: {DFA.transitions}")
 
-                DFA.to_graph()
+                DFA.to_graph("DFAMIN")
                 
                 is_word = DFA.simulate(word)
 
-                st.image("./graph.png.png", caption="Automata Diagram", use_column_width=True)
+                st.image("./DFAMIN.png", caption="Diagrama del automata minimizado", use_column_width=True)
 
                 if is_word:
                     st.success('La expresión es satisfacible 😃')

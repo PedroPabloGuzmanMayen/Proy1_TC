@@ -18,8 +18,9 @@ exp = infix_a_postfix(exp)
 automata = Thompson_Algorithm(exp)
 
 
+print(automata)
 
-
+automata.to_graph('automata')
 
 print(automata.epsilon_closure([automata.initial_state]))
 dfa_n = subsets_construction(automata)

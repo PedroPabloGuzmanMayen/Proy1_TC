@@ -37,7 +37,7 @@ class Automata:
     
     def to_graph(self, filename):
         dot = Digraph()
-        dot.attr(rankdir = 'LR', size = '8.5')
+        dot.attr(rankdir = 'LR', size = '15.0')
     # Añadimos los estados
         for state in self.states:
             #Si el estado es un estado de aceptación, dibujamos un doble ciírculo
