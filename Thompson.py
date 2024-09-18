@@ -1,5 +1,5 @@
 from Automata import Automata
-
+from NFA import NFA
 
 # Función para extraer los símbolos del alfabeto de la expresión regular
 def extraer_alfabeto(expresion_regular):
@@ -12,7 +12,7 @@ def extraer_alfabeto(expresion_regular):
     return alfabeto
 
 def initialize_automata(expression, state_counter):
-    return Automata([(expression + str(state_counter) + '1'), (expression + str(state_counter) +'2')], {expression},expression + str(state_counter) + '1', [expression + str(state_counter) + '2'],
+    return NFA([(expression + str(state_counter) + '1'), (expression + str(state_counter) +'2')], {expression},expression + str(state_counter) + '1', [expression + str(state_counter) + '2'],
                     {expression + str(state_counter) + '1': {expression: [expression + str(state_counter) + '2']}})
 
 def concat_automata(automata1, automata2):
@@ -30,7 +30,7 @@ def concat_automata(automata1, automata2):
     transitions = automata1.transitions
     
 
-    return Automata(states, alphabet, automata1.initial_state, [automata2.final_states[0]], transitions)
+    return NFA(states, alphabet, automata1.initial_state, [automata2.final_states[0]], transitions)
     
 def kleeneStar(automata, state_counter):
     states = automata.states
@@ -39,7 +39,7 @@ def kleeneStar(automata, state_counter):
     transitions = {states[0]: {"ε": [automata.initial_state, states[len(states)-1]]}} #Agregar las transiciones para el estado inicial
     transitions.update(automata.transitions) #Añadir a la nueva lista de transiciones las transiciones del automata original
     transitions[automata.final_states[0]] = {"ε": [automata.initial_state, states[len(states)-1]]} #Añadir la epsilon-transición para el estado final del automata original
-    return Automata(states, automata.alphabet, states[0], [states[len(states)-1]], transitions)
+    return NFA(states, automata.alphabet, states[0], [states[len(states)-1]], transitions)
     
 
 def or_operation(automata1, automata2, state_counter):
@@ -53,7 +53,7 @@ def or_operation(automata1, automata2, state_counter):
     transitions[automata1.final_states[0]] = {"ε": [states[len(states)-1]]} #Agregar la epsilon transicion al estado final del primer automata
     transitions[automata2.final_states[0]] = {"ε": [states[len(states)-1]]} #Agregar la epsilon transicion al estado final del srgundo automata
 
-    return Automata(states, automata1.alphabet.union(automata2.alphabet), states[0],[states[len(states)-1]], transitions )
+    return NFA(states, automata1.alphabet.union(automata2.alphabet), states[0],[states[len(states)-1]], transitions )
 
 
 

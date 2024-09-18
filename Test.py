@@ -1,7 +1,7 @@
 from shunting_yard import agregar_concatenacion_implicita, infix_a_postfix
 from Thompson import Thompson_Algorithm
 from Subconjuntos import subsets_construction
-from Minimizar import minimization
+from Minimizar import minimize
 from Automata import Automata
 import itertools
 
@@ -15,7 +15,7 @@ print(exp)
 
 automata = Thompson_Algorithm(exp)
 
-
+print(automata)
 
 dfa_n = subsets_construction(automata)
 
