@@ -5,11 +5,12 @@ Para ejecutar correctamente el proyecto, es necesario que la computadora tenga i
 - Python 
     - Streamlit
     - Pip
+- Graphviz
 - Docker (opcional)
 ## ¿Cómo ejecutar el proyecto?
 Para ejecutar el proyecto de manera local, abre una terminal y ejecuta:
 ```sh
-pip install Streamlit
+pip install streamlit graphviz
 streamlit run ./main.py
 ```
 Si no deseas instalar los paquetes de python, y tienes docker instalado puedes hacer lo siguiente:
