@@ -5,7 +5,7 @@ class DFA (Automata):
         state = self.initial_state
         register = [] #Almacena los estados por los que pasa el automata
         for i in expression:
-            register.append(f"From state {state} with character '{expression}'")
+            register.append(f"Desde el estado {state} con caracter '{i}'")
             
             # Verificar si el caacter es parte del alfabeto
             if i not in self.alphabet:
@@ -16,7 +16,7 @@ class DFA (Automata):
             # Verficiar el siguiente estado en la tabla de transiciones
             if i in self.transitions[state]:
                 state = self.transitions[state][i]
-                register[-1] += f" to state {state}"
+                register[-1] += f" al estado {state}"
             else:
                 # Si no hay transición válida para el caracter actual, retornar falso
                 return False, ["Error"]
