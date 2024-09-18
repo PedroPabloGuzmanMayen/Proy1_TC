@@ -22,5 +22,21 @@ class NFA(Automata):
             if symbol in self.transitions.get(state, {}):
                 next_states.update(self.transitions[state][symbol])
         return next_states 
-    def simulate(word):
-        pass
+    def simulate(self, input_string):
+        current_states = self.epsilon_closure(self.initial_state)
+        
+        for symbol in input_string:
+            next_states = set()
+            
+            for state in current_states:
+                if symbol in self.transitions.get(state, {}):
+                    for next_state in self.transitions[state][symbol]:
+                        next_states.update(self.epsilon_closure(next_state))
+            
+            current_states = next_states
+            
+            if not current_states:
+                return False  
+        
+        
+        return any(state in self.final_states for state in current_states)
