@@ -3,7 +3,14 @@ from shunting_yard import infix_a_postfix, agregar_concatenacion_implicita
 from Thompson import Thompson_Algorithm
 from Automata import Automata
 from Subconjuntos import subsets_construction
-from Minimizar import minimization
+from Minimizar import *
+
+predefined_expressions = [
+    'aabbaa',
+    'ababab',
+    'bbabb',
+    'abbaa'
+]
 
 def main():
     st.set_page_config(page_title ='Automata', page_icon="https://png.pngtree.com/png-vector/20220719/ourmid/pngtree-robot-logo-template-vector-icon-illustration-sign-symbol-computer-vector-png-image_37807128.png")
@@ -34,7 +41,7 @@ def main():
                 st.write(f"Estados finales: {DFA_n.final_states}")
                 st.write(f"Transiciones: {DFA_n.transitions}")
 
-                DFA = minimization(DFA_n)
+                DFA = minimize(DFA_n)
 
                 st.write("DFA minimizado: ")
                 st.write(f"Estados: {DFA.states}")
