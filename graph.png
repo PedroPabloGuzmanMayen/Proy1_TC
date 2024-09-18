@@ -1,4 +1,5 @@
 digraph {
+	rankdir=LR size=8.5
 	0 [shape=doublecircle]
 	1 [shape=circle]
 	2 [shape=circle]

@@ -21,19 +21,6 @@ dfa1 = subsets_construction(automata)
 dfa2 = minimization(dfa1)
 
 
-dfa2.to_graph()
+print(dfa2)
 
-auto2 = Automata(['A', 'B', 'C', 'D', 'E', 'F', 'G'], {'r', 'b'}, 'A', ['F', 'G'], 
-                 {'A': {'r':'B', 'b':'C'},
-                  'B': {'r': 'D', 'b':'E'},
-                  'C':{'r':'D', 'b':'F'},
-                  'D': {'r':'D', 'b':'G'},
-                  'E':{'r':'D', 'b':'G'},
-                  'F':{'r':'D', 'b':'C'},
-                  'G':{'r':'D', 'b':'G'}})
-
-print(auto2)
-
-state = auto2.simulate('rbb')
-
-print(state)
+print(dfa2.initial_state)
