@@ -15,7 +15,16 @@ predefined_expressions = [
 def main():
     st.set_page_config(page_title ='Automata', page_icon="https://png.pngtree.com/png-vector/20220719/ourmid/pngtree-robot-logo-template-vector-icon-illustration-sign-symbol-computer-vector-png-image_37807128.png")
     st.title('Construcción de Autómatas a partir de Expresiones Regulares')
-    expression = st.text_input("Ingresa la expresión regular:")
+    predefined_option = st.selectbox(
+        "Selecciona una expresión predefinida o ingresa la tuya:",
+        options=["Ingresar manualmente"] + predefined_expressions
+    )
+    
+    # Campo de texto para ingresar una expresión regular
+    expression = st.text_input(
+        "Ingresa la expresión regular:", 
+        "" if predefined_option == "Ingresar manualmente" else predefined_option
+    )
     word = st.text_input("Ingresa la palabra que crees que pertence a la expresión regular:  ")
     if st.button("Generar Autómata"):
         if expression:
