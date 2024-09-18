@@ -1,5 +1,5 @@
 from Automata import Automata
-
+from DFA import DFA
 
 def find_partition(state, partitions):
     for partition in partitions:
@@ -62,5 +62,5 @@ def minimize(dfa):
             
         
 
-    return Automata(new_states, dfa.alphabet, initial_state, final_states, new_transitions)
+    return DFA(new_states, dfa.alphabet, initial_state, final_states, new_transitions)
             

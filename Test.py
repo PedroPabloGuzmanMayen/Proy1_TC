@@ -5,7 +5,7 @@ from Minimizar import minimize
 from Automata import Automata
 import itertools
 
-exp = '(a|b)*c'
+exp = '(a|b)*abb'
 
 exp = agregar_concatenacion_implicita(exp)
 
@@ -91,13 +91,4 @@ print(dfa_n)
 
 part = minimize(dfa_n)
 
-set6 = {1,2,3}
-set7 = {4,3,6}
-
-
 print(part)
-
-
-word = 'aac'
-
-print(part.simulate(word))
