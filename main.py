@@ -8,8 +8,8 @@ from NFA import NFA
 from DFA import DFA
 
 predefined_expressions = [
-    'aabbaa',
-    'ababab',
+    'aa(bb)*c',
+    '(a|b)*abb',
     'bbabb',
     'abbaa'
 ]
@@ -48,7 +48,7 @@ def main():
                     st.write(transition)
                 NFA.to_graph("NFA")
                 st.image("./NFA.png", caption="Diagrama del autómata no determinista  ", use_column_width=True)
-                json_NFA = NFA.to_json()
+                json_NFA = NFA.to_json("NFA.json")
 
                 for transition in NFA_register:
                     st.write(transition)
@@ -66,7 +66,7 @@ def main():
                 for transition in DFA_register:
                     st.write(transition)
                 DFA_n.to_graph("DFA")
-                json_DFA1 = DFA_n.to_json()
+                json_DFA1 = DFA_n.to_json("DFA1,json")
                 st.image("./DFA.png", caption="Diagrama del autómata determinista sin minimizar", use_column_width=True)
 
                 DFA = minimize(DFA_n)
@@ -83,7 +83,7 @@ def main():
                     st.write(transition)
                 DFA.to_graph("DFAMIN")
                 
-                json_DFA = DFA.to_json()
+                json_DFA = DFA.to_json("DFA_MIN.json")
 
                 st.image("./DFAMIN.png", caption="Diagrama del automata minimizado", use_column_width=True)
 

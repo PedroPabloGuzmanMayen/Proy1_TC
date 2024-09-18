@@ -9,7 +9,7 @@ class Automata:
         self.final_states = final_states
         self.transitions = transitions
     #Escribe un automata a formato json
-    def to_json(self):
+    def to_json(self, filename):
         automata = {
             "Q": self.states,
             "Σ": list(self.alphabet),
@@ -17,6 +17,10 @@ class Automata:
             "F": self.final_states,
             "δ": self.transitions
         }
+
+        if filename:
+            with open(filename, 'w') as json_file:
+                json_file.write(json.dumps(automata, indent=4))
         return json.dumps(automata, indent=4)
 
     #Escribe un nuevo automata a partir de un archivo json
