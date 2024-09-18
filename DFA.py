@@ -3,29 +3,29 @@ from graphviz import Digraph
 class DFA (Automata):
     def simulate(self, expression):
         state = self.initial_state
-        
+        register = [] #Almacena los estados por los que pasa el automata
         for i in expression:
-            print(f'Estado actual: {state}')
+            register.append(f"From state {state} with character '{expression}'")
             
             # Verificar si el caacter es parte del alfabeto
             if i not in self.alphabet:
-                return False
+                return False, ["Error"]
             
-            print(f'Caracter actual: {i}')
+
             
             # Verficiar el siguiente estado en la tabla de transiciones
             if i in self.transitions[state]:
                 state = self.transitions[state][i]
-                print(f'Siguiente estado: {state}')
+                register[-1] += f" to state {state}"
             else:
                 # Si no hay transición válida para el caracter actual, retornar falso
-                return False
+                return False, ["Error"]
 
         # Verificar si el estado final es un estado de aceptación
         if state in self.final_states:
-            return True
+            return True, register
         else:
-            return False
+            return False, register
     def to_graph(self, filename):
         dot = Digraph()
         dot.attr(rankdir = 'LR', size = '15.0')

@@ -25,7 +25,9 @@ class NFA(Automata):
     def simulate(self, input_string):
 
         current_states = self.epsilon_closure({self.initial_state})
+        register = [] #Almacena los estados por los que pasa el automata
         for symbol in input_string:
+            register.append(f"Desde los estados {current_states} con caracter '{symbol}'")
             next_states = set()
             
             for state in current_states:
@@ -34,32 +36,32 @@ class NFA(Automata):
                         next_states.update(self.epsilon_closure({next_state}))
             
             current_states = next_states
+            register[-1] += f" A los estados {current_states}"
             
             if not current_states:
-                return False  
+                return False , register
         
         
-        return any(state in self.final_states for state in current_states)
+        return any(state in self.final_states for state in current_states), register
     
     def to_graph(self, filename):
-            # Create a new directed graph
+            
         dot = Digraph(comment='Automaton')
     
-    # Set node attributes
+        #Definimos los atributos del grafo
         dot.attr('node', shape='circle')
         dot.attr(rankdir = 'LR', size = '15.0')
-        # Add states to the graph, final states are double-circled
+        
         for state in self.states:
             if state in self.final_states:
                 dot.node(state, shape='doublecircle')
             else:
                 dot.node(state)
     
-    # Mark the initial state with a special arrow
-        dot.node('', shape='none', width='0', height='0', label='')  # Invisible start node
+    
+        dot.node('', shape='none', width='0', height='0', label='')  
         dot.edge('', self.initial_state)
     
-    # Add transitions between states
         for from_state, trans_dict in self.transitions.items():
             for symbol, to_states in trans_dict.items():
                 for to_state in to_states:

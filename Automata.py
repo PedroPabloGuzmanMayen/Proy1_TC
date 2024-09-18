@@ -12,7 +12,7 @@ class Automata:
     def to_json(self):
         automata = {
             "Q": self.states,
-            "Σ": self.alphabet,
+            "Σ": list(self.alphabet),
             "q0": self.initial_state,
             "F": self.final_states,
             "δ": self.transitions
@@ -35,29 +35,7 @@ class Automata:
                 f"initial_state={self.initial_state}, final_states={self.final_states}, "
                 f"transitions={self.transitions})")
     
-    def to_graph(self, filename):
-        dot = Digraph()
-        dot.attr(rankdir = 'LR', size = '15.0')
-    # Añadimos los estados
-        for state in self.states:
-            #Si el estado es un estado de aceptación, dibujamos un doble ciírculo
-            if state in self.final_states:
-                dot.node(str(state), shape='doublecircle')
-            else:
-                dot.node(str(state), shape='circle')
-
-    # Marcamos el estado inicial con una flecha
-        dot.node("", shape="none")  
-        dot.edge("", str(self.initial_state)) 
-
-    # Agregamos las transiciones
-        for state, paths in self.transitions.items():
-            for symbol, next_states in paths.items():
-                for next_state in str(next_states):
-                    dot.edge(str(state), str(next_state), label=symbol)
-
-        dot.render(filename, format='png', view=False)
-
+    #Simula el autómata
     def simulate(self, expression):
         state = self.initial_state
         for i in expression:

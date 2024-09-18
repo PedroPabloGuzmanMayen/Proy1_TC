@@ -5,7 +5,7 @@ from Minimizar import minimize
 from Automata import Automata
 import itertools
 
-exp = '(a|b)*abb'
+exp = 'aa(bb)*c'
 
 exp = agregar_concatenacion_implicita(exp)
 
@@ -27,7 +27,7 @@ dfa_n = subsets_construction(automata)
 
 print(dfa_n)
 
-print(dfa_n.simulate('aaabbbabb'))
+print(dfa_n.simulate('a'))
 
 
 part = minimize(dfa_n)
@@ -35,5 +35,5 @@ part = minimize(dfa_n)
 print(part)
 
 
-print(part.simulate('aaabbbabb'))
+print(part.simulate('a'))
 
