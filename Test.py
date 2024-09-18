@@ -96,3 +96,8 @@ set7 = {4,3,6}
 
 
 print(part)
+
+
+word = 'aac'
+
+print(part.simulate(word))
