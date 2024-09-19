@@ -1,5 +1,5 @@
 import streamlit as st
-from shunting_yard import infix_a_postfix, agregar_concatenacion_implicita, remove_epsilon
+from shunting_yard import infix_a_postfix, agregar_concatenacion_implicita
 from Thompson import Thompson_Algorithm
 from Automata import Automata
 from Subconjuntos import subsets_construction
@@ -31,7 +31,7 @@ def main():
     if st.button("Generar Autómata"):
         if expression:
             try:
-                expression = remove_epsilon(expression)
+                #expression = remove_epsilon(expression)
                 expression = agregar_concatenacion_implicita(expression)
                 postfix_expression = infix_a_postfix(expression)
                 st.write(f"Expresión en notación postfix: {postfix_expression}")
@@ -84,6 +84,7 @@ def main():
                     st.write(transition)
                 DFA.to_graph("DFAMIN")
                 
+                print(DFA)
                 json_DFA = DFA.to_json("DFA_MIN.json")
 
                 st.image("./DFAMIN.png", caption="Diagrama del automata minimizado", use_column_width=True)

@@ -8,21 +8,21 @@ class DFA (Automata):
             register.append(f"Desde el estado {state} con caracter '{i}'")
             
             # Verificar si el caacter es parte del alfabeto
-            if i not in self.alphabet:
+            print(i not in self.alphabet and i != 'ε')
+            if i not in self.alphabet and i != 'ε':
                 return False, ["Error"]
             
-
-            
+            #Manejo del caracter epsilon
+            if i == 'ε':
+                register[-1] += f" permanece en el estado {state}"
             # Verficiar el siguiente estado en la tabla de transiciones
             if i in self.transitions[state]:
                 state = self.transitions[state][i]
                 register[-1] += f" al estado {state}"
-            else:
-                # Si no hay transición válida para el caracter actual, retornar falso
-                return False, ["Error"]
-
+        print(state)
         # Verificar si el estado final es un estado de aceptación
         if state in self.final_states:
+            print(state)
             return True, register
         else:
             return False, register
