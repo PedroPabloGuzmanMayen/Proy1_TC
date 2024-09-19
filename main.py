@@ -1,5 +1,5 @@
 import streamlit as st
-from shunting_yard import infix_a_postfix, agregar_concatenacion_implicita
+from shunting_yard import infix_a_postfix, agregar_concatenacion_implicita, remove_epsilon
 from Thompson import Thompson_Algorithm
 from Automata import Automata
 from Subconjuntos import subsets_construction
@@ -10,7 +10,7 @@ from DFA import DFA
 predefined_expressions = [
     'aa(bb)*c',
     '(a|b)*abb',
-    'bbabb',
+    '(b|b)*abb(a|b)*',
     'abbaa'
 ]
 
@@ -31,6 +31,7 @@ def main():
     if st.button("Generar Autómata"):
         if expression:
             try:
+                expression = remove_epsilon(expression)
                 expression = agregar_concatenacion_implicita(expression)
                 postfix_expression = infix_a_postfix(expression)
                 st.write(f"Expresión en notación postfix: {postfix_expression}")

@@ -1,4 +1,8 @@
 # Algoritmo Shunting Yard para convertir una expresión regular de infix a postfix
+import re
+def remove_epsilon(expression):
+    result = re.sub(r'ε', '', expression)
+    return result
 def agregar_concatenacion_implicita(expresion_regular):
     """
     Inserta el operador de concatenación (.) implícito en la expresión regular.

@@ -35,7 +35,6 @@ def minimize(dfa):
             cond = False
         else:
             old_partitions = new_partition #La antigua partición se convierte en la nueva partición
-    print(new_partition)
 
     # Mapeamos las nuevas particiones a estados enteros del AFD
     new_transitions = {}
