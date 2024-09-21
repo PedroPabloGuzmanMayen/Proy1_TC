@@ -35,18 +35,13 @@ class Automata:
         )
     #Imprime la información del automata
     def __repr__(self):
-        return (f"Automaton(states={self.states}, alphabet={self.alphabet}, "
-                f"initial_state={self.initial_state}, final_states={self.final_states}, "
-                f"transitions={self.transitions})")
-    
-    #Simula el autómata
-    def simulate(self, expression):
-        state = self.initial_state
-        for i in expression:
-            state = self.transitions[state][i]
+        return (f"Automaton(\n"
+            f"  states={self.states},\n"
+            f"  alphabet={self.alphabet},\n"
+            f"  initial_state={self.initial_state},\n"
+            f"  final_states={self.final_states},\n"
+            f"  transitions={self.transitions}\n"
+            f")")
 
-        if state in self.final_states:
-            return True
-        else:
-            return False
+    
 

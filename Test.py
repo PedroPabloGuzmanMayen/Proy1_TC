@@ -12,9 +12,19 @@ from Subconjuntos import subsets_construction
 
 from Minimizar import minimize
 
-expression = "(a|b)*"
 
-word = 'ε'
+import unittest
+
+class TestExample(unittest.TestCase):
+    def test_addition(self):
+        self.assertEqual(1 + 1, 2)
+
+if __name__ == '__main__':
+    unittest.main()
+
+expression = "(a|b)*accb(a|b)*"
+
+word = 'aaabc'
 expression = agregar_concatenacion_implicita(expression)
 postfix_expression = infix_a_postfix(expression)
 

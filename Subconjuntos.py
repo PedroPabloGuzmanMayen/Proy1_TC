@@ -1,30 +1,8 @@
 from Automata import Automata
 from NFA import NFA
 from DFA import DFA
-# Función que calcula el cierre de un conjunto de estados.
-def epsilon_closure(automata, states):
-    closure = set(states)
-    stack = list(states)
 
-    while stack:
-        state = stack.pop() 
-        # Si el estado tiene transiciones epsilon seguimos
-        if 'ε' in automata.transitions.get(state, {}):
-            for next_state in automata.transitions[state]['ε']:
-                if next_state not in closure:
-                    closure.add(next_state) 
-                    stack.append(next_state)
 
-    return closure  # Devuelve el conjunto de estados alcanzables por ε-transiciones
-
-# Función que aplica la transición de un conjunto de estados bajo un símbolo dado.
-def move(automata, states, symbol):
-    next_states = set() 
-    for state in states:
-        # Si hay una transición con el símbolo, se añaden los estados alcanzados
-        if symbol in automata.transitions.get(state, {}):
-            next_states.update(automata.transitions[state][symbol])
-    return next_states 
 
 # Función que implementa la construcción de subconjuntos (convierte AFN a AFD).
 def subsets_construction(nfa):

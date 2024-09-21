@@ -80,6 +80,7 @@ def main():
                 st.write(f"Transiciones: {DFA.transitions}")
                 st.write("Simulación del DFA minimizado: ")
                 is_DFAN_word, DFAN_register = DFA.simulate(word)
+                print(DFA.simulate(word))
                 for transition in DFAN_register:
                     st.write(transition)
                 DFA.to_graph("DFAMIN")

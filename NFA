@@ -9,7 +9,10 @@ digraph {
 	b21
 	b22
 	h3
-	j3 [shape=doublecircle]
+	j3
+	a32
+	b42
+	b52 [shape=doublecircle]
 	"" [label="" height=0 shape=none width=0]
 	"" -> k3
 	k3 -> i3 [label="ε"]
@@ -22,4 +25,7 @@ digraph {
 	b22 -> h3 [label="ε"]
 	h3 -> i3 [label="ε"]
 	h3 -> j3 [label="ε"]
+	j3 -> a32 [label=a]
+	a32 -> b42 [label=b]
+	b42 -> b52 [label=b]
 }
