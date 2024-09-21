@@ -51,9 +51,6 @@ def main():
                 st.image("./NFA.png", caption="Diagrama del autómata no determinista  ", use_column_width=True)
                 json_NFA = NFA.to_json("NFA.json")
 
-                for transition in NFA_register:
-                    st.write(transition)
-
                 DFA_n = subsets_construction(NFA)
 
                 st.write("NFA a DFA: ")
